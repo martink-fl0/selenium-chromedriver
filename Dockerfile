@@ -6,13 +6,24 @@
 
 FROM python:3.11
 
-# Install dependencies
-RUN apt-get update && apt-get install -y wget unzip
+RUN  apt-get update \
+  && apt-get install -y wget unzip \
+  && rm -rf /var/lib/apt/lists/*
 
-# Download and install chromedriver
-# RUN wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/linux64/chrome-linux64.zip
-# RUN unzip chromedriver_linux64.zip -d /usr/local/bin/
-# RUN rm chromedriver_linux64.zip
+RUN apt-get update \ 
+  && apt-get install -y libglib2.0-0 \
+  libnss3 \
+  libgconf-2-4 \
+  libfontconfig1 \
+  libxcb1
+
+# install chrome directly
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN dpkg -i google-chrome-stable_current_amd64.deb --fix-missing; apt-get -fy install
+
+# install chromedriver
+RUN wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
+RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
 
 WORKDIR /code
 
@@ -28,12 +39,12 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 #     && apt-get update \
 #     && apt-get -y install google-chrome-stable
 
-RUN apt-get update && apt-get install gnupg wget -y && \
-  wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg && \
-  sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' && \
-  apt-get update && \
-  apt-get install google-chrome-stable -y && \
-  rm -rf /var/lib/apt/lists/*
+# RUN apt-get update && apt-get install gnupg wget -y && \
+#   wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg && \
+#   sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' && \
+#   apt-get update && \
+#   apt-get install google-chrome-stable -y && \
+#   rm -rf /var/lib/apt/lists/*
 
 # Copy the rest of the application code
 COPY . .
