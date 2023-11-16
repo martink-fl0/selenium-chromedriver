@@ -12,11 +12,11 @@ from webdriver_manager.core.os_manager import ChromeType
 # options.binary_location = "/usr/local/bin"
 
 # driver = webdriver.Chrome(options=options)
-# driver = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
+driver = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
 
 chrome_options = Options()
+chrome_options.binary_location = "/usr/local/bin/chrome"
 chrome_options.add_argument("--headless=new")
-# chrome_options.binary_location = "/usr/bin/google-chrome"
 driver = webdriver.Chrome()
 app = FastAPI()
 with open("test.txt", 'w') as f:
