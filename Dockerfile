@@ -6,6 +6,20 @@
 
 FROM python:3.11
 
+# Download and unzip Chrome
+RUN wget -O /tmp/chrome-linux64.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/linux64/chrome-linux64.zip
+RUN unzip /tmp/chrome-linux64.zip -d /usr/local/bin/
+RUN rm /tmp/chrome-linux64.zip
+
+# Install Chromedriver
+RUN apt-get -y install unzip
+RUN wget -O /tmp/chromedriver.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/linux64/chromedriver-linux64.zip
+RUN unzip /tmp/chromedriver.zip -d /usr/local/bin/
+RUN rm /tmp/chromedriver.zip
+
+# Set the PATH variable
+ENV PATH="/usr/local/bin:${PATH}"
+
 # RUN  apt-get update \
 #   && apt-get install -y wget unzip \
 #   && rm -rf /var/lib/apt/lists/*

@@ -9,15 +9,15 @@ from webdriver_manager.core.os_manager import ChromeType
 # options = webdriver.ChromeOptions()
 # options.add_argument('--no-sandbox')
 # options.add_argument('--headless=new')
-# options.binary_location = "/usr/bin/google-chrome"
+# options.binary_location = "/usr/local/bin"
 
 # driver = webdriver.Chrome(options=options)
-driver = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
+# driver = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
 
-# chrome_options = Options()
-# chrome_options.add_argument("--headless=new")
+chrome_options = Options()
+chrome_options.add_argument("--headless=new")
 # chrome_options.binary_location = "/usr/bin/google-chrome"
-# driver = webdriver.Chrome()
+driver = webdriver.Chrome()
 app = FastAPI()
 with open("test.txt", 'w') as f:
     f.write("")
