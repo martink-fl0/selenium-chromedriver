@@ -10,7 +10,7 @@ FROM python:3.11
 RUN apt-get update && apt-get install -y wget unzip
 
 # Download and install chromedriver
-RUN wget https://chromedriver.storage.googleapis.com/119.0.6045.105/chromedriver_linux64.zip
+RUN wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/linux64/chrome-linux64.zip
 RUN unzip chromedriver_linux64.zip -d /usr/local/bin/
 RUN rm chromedriver_linux64.zip
 
