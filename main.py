@@ -1,6 +1,9 @@
 from fastapi import FastAPI
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+import chromedriver_autoinstaller
+
+chromedriver_autoinstaller.install()
 
 # Create ChromeOptions object to configure headless mode
 chrome_options = Options()
