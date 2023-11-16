@@ -1,17 +1,19 @@
 from fastapi import FastAPI
-from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import chromedriver_autoinstaller
-
-chromedriver_autoinstaller.install()
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.core.os_manager import ChromeType
 
 # Create ChromeOptions object to configure headless mode
-options = webdriver.ChromeOptions()
-options.add_argument('--no-sandbox')
-options.add_argument('--headless=new')
-options.binary_location = "/usr/bin/google-chrome"
+# options = webdriver.ChromeOptions()
+# options.add_argument('--no-sandbox')
+# options.add_argument('--headless=new')
+# options.binary_location = "/usr/bin/google-chrome"
 
-driver = webdriver.Chrome(options=options)
+# driver = webdriver.Chrome(options=options)
+driver = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
+
 # chrome_options = Options()
 # chrome_options.add_argument("--headless=new")
 # chrome_options.binary_location = "/usr/bin/google-chrome"
