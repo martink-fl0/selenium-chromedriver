@@ -6,10 +6,16 @@ import chromedriver_autoinstaller
 chromedriver_autoinstaller.install()
 
 # Create ChromeOptions object to configure headless mode
-chrome_options = Options()
-chrome_options.add_argument("--headless=new")
-chrome_options.binary_location = "/usr/bin/google-chrome"
-driver = webdriver.Chrome()
+options = webdriver.ChromeOptions()
+options.add_argument('--no-sandbox')
+options.add_argument('--headless=new')
+options.binary_location = "/usr/bin/google-chrome"
+
+driver = webdriver.Chrome(options=options)
+# chrome_options = Options()
+# chrome_options.add_argument("--headless=new")
+# chrome_options.binary_location = "/usr/bin/google-chrome"
+# driver = webdriver.Chrome()
 app = FastAPI()
 with open("test.txt", 'w') as f:
     f.write("")
