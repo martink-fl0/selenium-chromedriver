@@ -5,7 +5,8 @@ from selenium.webdriver.chrome.options import Options
 # Create ChromeOptions object to configure headless mode
 chrome_options = Options()
 chrome_options.add_argument("--headless=new")
-driver = webdriver.Chrome()
+# chrome_options.add_argument('--disable-dev-shm-usage')
+driver = webdriver.Chrome(options=chrome_options)
 app = FastAPI()
 with open("test.txt", 'w') as f:
     f.write("")
